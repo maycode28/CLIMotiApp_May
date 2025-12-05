@@ -20,7 +20,17 @@ public class App {
         while(isRunning){
             System.out.print("명령어 ) ");
             String command = sc.nextLine().trim();
-            switch (command) {
+            String[] commands = command.split(" ");
+            int id=0;
+            if (commands.length > 1){
+                try{
+                    id=Integer.parseInt(commands[1]);
+                }catch(Exception e){
+                    System.out.println("올바른 명령어를 입력해주세요.");
+                    continue;
+                }
+            }
+            switch (commands[0]) {
                 case "exit":
                     isRunning = false;
                     SystemController.exit();
@@ -37,6 +47,19 @@ public class App {
                 case "list":
                     MotivationController.list();
                     break;
+
+                case "del" :
+                    MotivationController.delete(id);
+                    break;
+
+                case "edit" :
+                    MotivationController.edit(id);
+                    break;
+
+                case "detail" :
+                    MotivationController.detail(id);
+                    break;
+
 
                 default:
                     System.out.println("올바른 명령어를 입력해주세요.");
